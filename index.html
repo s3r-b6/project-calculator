@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script href="./calculator.js"></script>
+    <noscript>JavaScript es necesario para esta página!</noscript>
+  </head>
+  <body>
+    <p>
+      Para usar el input de teclado: introducir las operaciones de una en una,
+      sin espacios. P.ej: 100.24/0.52
+    </p>
+    <main id="calc-app">
+<!-- Creo que el patrón funciona muy bien, aunque no estoy seguro de si habrá algún bug escondido https://regexr.com/. -->
+      <input
+        type="text"
+        id="screen"
+        placeholder="0"
+        pattern="([0-9]+[\.\,]?[0-9]?)+([\*\/\+\-]+[0-9]+[\.\,]?[0-9]?)?"
+      />
+      <div class="op-b">7</div>
+      <div class="op-b">8</div>
+      <div class="op-b">9</div>
+      <div class="op-b">/</div>
+      <div class="op-b">4</div>
+      <div class="op-b">5</div>
+      <div class="op-b">6</div>
+      <div class="op-b">*</div>
+      <div class="op-b">1</div>
+      <div class="op-b">2</div>
+      <div class="op-b">3</div>
+      <div class="op-b">-</div>
+      <div class="op-b">0</div>
+      <div class="op-b">.</div>
+      <div class="op-b">=</div>
+      <div class="op-b">+</div>
+    </main>
+  </body>
+</html>
