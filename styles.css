@@ -20,10 +20,9 @@ p {
   left: 0%;
   text-align: center;
   width: auto;
-  padding-right: 2.2em;
+  padding-right: 1em;
   padding-top: 0.75em;
   padding-bottom: 0.75em;
-  margin-top: 1.5em;
   color: whitesmoke;
   text-align: right;
   border-radius: 12px;
@@ -32,13 +31,7 @@ p {
 
 .inv:hover + .inv {
   box-sizing: border-box;
-
   opacity: 1 !important;
-}
-
-input:focus {
-  border: none;
-  outline: 1px solid slategrey;
 }
 
 #calc-app {
@@ -62,30 +55,38 @@ input:focus {
   height: 320px;
 }
 
-#screen {
-    box-sizing: border-box;
-
+#input-cont {
   grid-row: 1 / 1;
   grid-column: 1/5;
+  background-color: #d1d1d1;
+  border-radius: 10px;
+}
+
+#screen {
+  box-sizing: border-box;
   font-size: 28px;
   color: #53565a;
-  align-self: right;
-  justify-self: right;
+  align-self: center;
+  justify-self: center;
   text-align: right;
   width: 100%;
   height: auto;
-  background-color: #e2dfd2;
-  padding-right: 5%;
-  padding-left: 5%;
-  padding-top: 0.75em;
-  padding-bottom: 0.75em;
+  background-color: #e2e2e2;
   border-radius: 8px;
+  padding: 0.5em 0.25em;
+  transition: background-color 200ms;
 }
+
+#screen:focus {
+  background-color: transparent;
+  outline: #36424d solid 2px;
+}
+
 
 .op-b {
   width: 100%;
   height: 100%;
-  color: #f9f6ee;
+  color: #1b1b1b;
   box-sizing: border-box;
   padding: 2em;
   font-size: 16px;
