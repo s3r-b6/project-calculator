@@ -69,6 +69,18 @@ window.onload = () => {
       }
     });
   });
+  let dotButton = document.querySelector("#dot-b");
+  dotButton.addEventListener("click", () => {
+    if (/\d+(?!.,)/.test(screen.value)) {
+      screen.value = screen.value + dotButton.textContent;
+    } else if ((screen.value = "")) {
+      console.log(screen.value);
+      return;
+    } else {
+      return;
+    }
+  });
+
   let eqButton = document.querySelector("#equals-b");
   eqButton.addEventListener("click", () => {
     b = screen.value;
