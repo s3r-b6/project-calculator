@@ -1,4 +1,5 @@
-//manual input
+//Input con teclado.
+//Cambia , por . | parte la string con el op en medio | borra los números y toma la op
 function cookInput(cookString) {
   cookString = cookString.replaceAll(/,/g, ".");
   let valuesArray = cookString.split(/[\*\/\+\-]{1}/, 2);
@@ -12,8 +13,10 @@ function cookInput(cookString) {
 }
 
 function operate(a, b, op) {
+  //innecesario??
   parseFloat(a);
   parseFloat(b);
+  //
   switch (op) {
     case "+":
       return a + b;
@@ -56,7 +59,6 @@ window.onload = () => {
         return;
       } else if (/[^=]/.test(screen.value)) {
         //si screen.value no tiene como output el resultado, entender el input anterior (un número) como input de a
-        //fix cutre pero no he encontrado otra forma.
         a = screen.value.replaceAll("= ", "");
         screen.value = "";
         screen.value = screen.value + button.textContent;
@@ -93,7 +95,6 @@ window.onload = () => {
       console.log(typeof result, typeof a, typeof b);
       console.log(a, op, b, "=", result);
       screen.value = eqButton.textContent + " " + result;
-      //se usa la b como cache
       console.log(result);
       a = result;
     } else {
@@ -106,7 +107,6 @@ window.onload = () => {
   document.querySelector("#screen").addEventListener("keypress", (e) => {
     if (e.keyCode == 13 || e.which == 13) {
       console.log("Enter key is pressed");
-      //caso: operación entera
       if (
         /([0-9]+([.,]+[0-9]+)?)+([\*\/\+\-]+[0-9]+([.,]+[0-9]+)?)/.test(
           screen.value
@@ -114,13 +114,14 @@ window.onload = () => {
       ) {
         console.log(screen.value);
         cookInput(screen.value);
-        //caso: operación por partes
       } else {
+        screen.value = "ERROR: mal input";
       }
-
       return true;
     } else {
       return false;
     }
   });
 };
+
+
