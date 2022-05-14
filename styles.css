@@ -55,7 +55,7 @@ p {
   height: 320px;
 }
 
-#input-cont {
+#screen-cont {
   grid-row: 1 / 1;
   grid-column: 1/5;
   background-color: #d1d1d1;
@@ -83,7 +83,7 @@ p {
 }
 
 
-.op-b {
+.op-b, .num-b, #equals-b {
   width: 100%;
   height: 100%;
   color: #1b1b1b;
@@ -95,7 +95,8 @@ p {
   text-align: center;
 }
 
-.op-b:hover {
+.op-b:hover, .num-b:hover, #equals-b:hover {
   cursor: pointer;
   background-color: rgb(145, 145, 145);
+  transition: background-color 200ms;
 }

@@ -6,43 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script href="./calculator.js"></script>
+    <script src="./calculator.js"></script>
     <noscript>JavaScript es necesario para esta página!</noscript>
   </head>
   <body>
     <main>
       <div id="calc-app">
-        <!-- Creo que el patrón
-          /([0-9]+[\.\,]?[0-9]?)+([\*\/\+\-]+[0-9]+[\.\,]?[0-9]?)?/
-          funciona muy bien, aunque no estoy seguro de si habrá algún bug escondido https://regexr.com/. -->
-        <form id="input-cont" class="inv" autocomplete="off">
+        <div id="screen-cont"class="inv">
           <input
             type="text"
             id="screen"
             placeholder="0"
             pattern="([0-9]+([.,]+[0-9]+)?)+([\*\/\+\-]+[0-9]+([.,]+[0-9]+)?)?"
+            autocomplete="off"
           />
-          <input id="submit" type="submit" style="display: none" />
-        </form>
+        </div>
         <p class="inv">
           Para introducir el input con el teclado, introducir las operaciones de
           una en una, sin espacios (p.ej: 100.24/0.52) y utilizar enter.
         </p>
-        <div class="op-b">7</div>
-        <div class="op-b">8</div>
-        <div class="op-b">9</div>
+        <div class="num-b">7</div>
+        <div class="num-b">8</div>
+        <div class="num-b">9</div>
         <div class="op-b">/</div>
-        <div class="op-b">4</div>
-        <div class="op-b">5</div>
-        <div class="op-b">6</div>
+        <div class="num-b">4</div>
+        <div class="num-b">5</div>
+        <div class="num-b">6</div>
         <div class="op-b">*</div>
-        <div class="op-b">1</div>
-        <div class="op-b">2</div>
-        <div class="op-b">3</div>
+        <div class="num-b">1</div>
+        <div class="num-b">2</div>
+        <div class="num-b">3</div>
         <div class="op-b">-</div>
-        <div class="op-b">0</div>
+        <div class="num-b">0</div>
         <div class="op-b">.</div>
-        <div class="op-b" id="equals-b">=</div>
+        <div id="equals-b">=</div>
         <div class="op-b">+</div>
       </div>
     </main>

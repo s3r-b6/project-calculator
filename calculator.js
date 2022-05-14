@@ -1,3 +1,4 @@
+//manual input
 function cookInput(cookString) {
   cookString = cookString.replaceAll(/,/g, ".");
   let valuesArray = cookString.split(/[\*\/\+\-]{1}/, 2);
@@ -7,47 +8,85 @@ function cookInput(cookString) {
   let b = parseFloat(valuesArray[1]);
   let op = operation;
 
-  function operate(a, b, op) {
-    switch (op) {
-      case "+":
-        return a + b;
-      case "-":
-        return a - b;
-      case "*":
-        return a * b;
-      case "/":
-        return a / b;
-    }
-  }
-  return operate(a, b, op);
+  document.querySelector("#screen").value = operate(a, b, op);
 }
 
-/*
-      //la idea es que a sea la cache; p.ej
-      //a op b | res
-      //2 +  4 | 6   (+ 8)
-      //al volver al form, entiendo que no hace falta utilizar una variable para almacenar la cache?
-      RegEx:        /([0-9]+[\.\,]?[0-9]+)+([\*\/\+\-]+[0-9]+[\.\,]?[0-9]+)?/
-      !! Nueva RegEx: !!
-      /([0-9]+([\.\,]+[0-9]+)?)+([\*\/\+\-]+[0-9]+([\.\,]+[0-9]+)?)?/
-      fix para dejar sólo la op. ([0-9]+([\.\,]+[0-9]+)?)
-  */
+function operate(a, b, op) {
+  switch (op) {
+    case "+":
+      return a + b;
+    case "-":
+      return a - b;
+    case "*":
+      return a * b;
+    case "/":
+      return a / b;
+  }
+}
 
-window.onload = function () {
-  var form = document.getElementById("submit");
-  form.addEventListener("submit", function (userString) {
-    if (!isValid) {
-      prompt("Por favor introduce valores válidos");
-      return false;
-    } else {
-      let result = cookInput(userString);
-      document.getElementById("screen").textContent = result;
-      return true;
-    }
+//Event listeners
+window.onload = () => {
+  let numButtons = document.querySelectorAll(".num-b");
+  let screen = document.querySelector("#screen");
+  let a;
+  let b;
+  let op;
+  numButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (/[\*\/\+\-]/.test(screen.value)) {
+        op = screen.value;
+        screen.value = "";
+        screen.value = screen.value + button.textContent;
+      } else {
+        screen.value = screen.value + button.textContent;
+        console.log(button.textContent, button);
+      }
+    });
   });
-  let button = document.querySelectorAll(".op-b");
-  button.forEach.addEventListener("click", function () {
-    let buttonValue = button.textContent;
-    document.querySelector("#screen").textContent = buttonValue;
+  let opButtons = document.querySelectorAll(".op-b");
+  opButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (screen.value == "") {
+        return;
+      }
+      a = screen.value;
+      screen.value = "";
+      screen.value = screen.value + button.textContent;
+    });
+  });
+  let eqButton = document.querySelector("#equals-b");
+  eqButton.addEventListener("click", () => {
+    b = screen.value;
+    screen.value = calculator.operate(a, b, op);
+    screen.value = screen.value + eqButton.textContent;
+  });
+  document.querySelector("#equals-b").addEventListener("click", () => {
+    console.log("equals-test");
+  });
+  //para el input manual
+  document.querySelector("#screen").addEventListener("keypress", (e) => {
+    if (e.keyCode == 13 || e.which == 13) {
+      console.log("Enter key is pressed");
+      //caso: operación entera
+      if (
+        /([0-9]+([.,]+[0-9]+)?)+([\*\/\+\-]+[0-9]+([.,]+[0-9]+)?)/.test(
+          screen.value
+        )
+      ) {
+        console.log(screen.value);
+        cookInput(screen.value);
+      //caso: operación por partes
+      } else {
+        
+        while (i < 3) {
+          
+          console.log(i)
+        }
+      }
+
+      return true;
+    } else {
+      return false;
+    }
   });
 };
