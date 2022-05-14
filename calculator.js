@@ -12,6 +12,8 @@ function cookInput(cookString) {
 }
 
 function operate(a, b, op) {
+  parseFloat(a);
+  parseFloat(b);
   switch (op) {
     case "+":
       return a + b;
@@ -31,10 +33,13 @@ window.onload = () => {
   let a;
   let b;
   let op;
+  //para el clickInput
   numButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (/[\*\/\+\-]/.test(screen.value)) {
-        op = screen.value;
+      if (/[\=\*\/\+\-]/.test(screen.value)) {
+        screen.value = "";
+        screen.value = screen.value + button.textContent;
+      } else if (/[ERROR]/.test(screen.value)) {
         screen.value = "";
         screen.value = screen.value + button.textContent;
       } else {
@@ -46,24 +51,46 @@ window.onload = () => {
   let opButtons = document.querySelectorAll(".op-b");
   opButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (screen.value == "") {
+      if (screen.value == "" || screen.value == "ERROR") {
+        screen.value = "ERROR";
         return;
+      } else if (/[^=]/.test(screen.value)) {
+        //si screen.value no tiene como output el resultado, entender el input anterior (un número) como input de a
+        //fix cutre pero no he encontrado otra forma.
+        a = screen.value.replaceAll("= ", "");
+        screen.value = "";
+        screen.value = screen.value + button.textContent;
+        op = screen.value;
+      } else {
+        b = screen.value;
+        screen.value = "";
+        screen.value = screen.value + button.textContent;
+        op = screen.value;
       }
-      a = screen.value;
-      screen.value = "";
-      screen.value = screen.value + button.textContent;
     });
   });
   let eqButton = document.querySelector("#equals-b");
   eqButton.addEventListener("click", () => {
     b = screen.value;
-    screen.value = calculator.operate(a, b, op);
-    screen.value = screen.value + eqButton.textContent;
+    if (
+      /([0-9]+([\.]+[0-9]+)?)/.test(a) &&
+      /([0-9]+([\.]+[0-9]+)?)/.test(b) &&
+      /[\*\/\+\-]/.test(op)
+    ) {
+      let result = operate(a, b, op);
+      console.log(typeof result, typeof a, typeof b);
+      console.log(a, op, b, "=", result);
+      screen.value = eqButton.textContent + " " + result;
+      //se usa la b como cache
+      console.log(result);
+      a = result;
+    } else {
+      screen.value = "ERROR";
+      return;
+    }
   });
-  document.querySelector("#equals-b").addEventListener("click", () => {
-    console.log("equals-test");
-  });
-  //para el input manual
+
+  //para el keybInput
   document.querySelector("#screen").addEventListener("keypress", (e) => {
     if (e.keyCode == 13 || e.which == 13) {
       console.log("Enter key is pressed");
@@ -75,13 +102,8 @@ window.onload = () => {
       ) {
         console.log(screen.value);
         cookInput(screen.value);
-      //caso: operación por partes
+        //caso: operación por partes
       } else {
-        
-        while (i < 3) {
-          
-          console.log(i)
-        }
       }
 
       return true;
