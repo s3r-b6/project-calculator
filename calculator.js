@@ -1,9 +1,10 @@
 function cookInput(cookString) {
+  cookString = cookString.replaceAll(/,/g, ".");
   let valuesArray = cookString.split(/[\*\/\+\-]{1}/, 2);
-  let operation = cookString.replaceAll(/([0-9]+[\.\,]?[0-9]+)/, "");
+  let operation = cookString.replaceAll(/([0-9]+([\.]+[0-9]+)?)/g, "");
 
-  let a = parseInt(valuesArray[0]);
-  let b = parseInt(valuesArray[1]);
+  let a = parseFloat(valuesArray[0]);
+  let b = parseFloat(valuesArray[1]);
   let op = operation;
 
   function operate(a, b, op) {
@@ -27,6 +28,9 @@ function cookInput(cookString) {
       //2 +  4 | 6   (+ 8)
       //al volver al form, entiendo que no hace falta utilizar una variable para almacenar la cache?
       RegEx:        /([0-9]+[\.\,]?[0-9]+)+([\*\/\+\-]+[0-9]+[\.\,]?[0-9]+)?/
+      !! Nueva RegEx: !!
+      /([0-9]+([\.\,]+[0-9]+)?)+([\*\/\+\-]+[0-9]+([\.\,]+[0-9]+)?)?/
+      fix para dejar sólo la op. ([0-9]+([\.\,]+[0-9]+)?)
   */
 
 window.onload = function () {
@@ -38,7 +42,12 @@ window.onload = function () {
     } else {
       let result = cookInput(userString);
       document.getElementById("screen").textContent = result;
-      return false;
+      return true;
     }
+  });
+  let button = document.querySelectorAll(".op-b");
+  button.forEach.addEventListener("click", function () {
+    let buttonValue = button.textContent;
+    document.querySelector("#screen").textContent = buttonValue;
   });
 };
