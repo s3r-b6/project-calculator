@@ -1,36 +1,34 @@
-//Input con teclado.
-//Cambia , por . | parte la string con el op en medio | borra los números y toma la op
-function cookInput(cookString) {
-  cookString = cookString.replaceAll(/,/g, ".");
-  let valuesArray = cookString.split(/[\*\/\+\-]{1}/, 2);
-  let operation = cookString.replaceAll(/([0-9]+([\.]+[0-9]+)?)/g, "");
-
-  let a = parseFloat(valuesArray[0]);
-  let b = parseFloat(valuesArray[1]);
-  let op = operation;
-
-  document.querySelector("#screen").value = operate(a, b, op);
-}
-
-function operate(a, b, op) {
-  //innecesario??
-  parseFloat(a);
-  parseFloat(b);
-  //
-  switch (op) {
-    case "+":
-      return a + b;
-    case "-":
-      return a - b;
-    case "*":
-      return a * b;
-    case "/":
-      return a / b;
-  }
-}
-
 //Event listeners
 window.onload = () => {
+  //Input con teclado.
+  //Cambia , por . | parte la string con el op en medio | borra los números y toma la op
+  function cookInput(cookString) {
+    cookString = cookString.replaceAll(/,/g, ".");
+    let valuesArray = cookString.split(/[\*\/\+\-]{1}/, 2);
+    let operation = cookString.replaceAll(/([0-9]+([\.]+[0-9]+)?)/g, "");
+
+    let a = parseFloat(valuesArray[0]);
+    let b = parseFloat(valuesArray[1]);
+    let op = operation;
+
+    document.querySelector("#screen").value = operate(a, b, op);
+  }
+
+  function operate(a, b, op) {
+    parseFloat(a);
+    parseFloat(b);
+    switch (op) {
+      case "+":
+        return a + b;
+      case "-":
+        return a - b;
+      case "*":
+        return a * b;
+      case "/":
+        return a / b;
+    }
+  }
+
   let numButtons = document.querySelectorAll(".num-b");
   let screen = document.querySelector("#screen");
   let a;
@@ -123,5 +121,3 @@ window.onload = () => {
     }
   });
 };
-
-
